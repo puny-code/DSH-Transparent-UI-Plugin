@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-client-ui-aqua
+# @puny-code/dsh-client-ui-aqua
 
 ## 本 README 在原作者**英文 README** 与**中文 README** 全文的基础上，于文末新增「**适配 0.1.1-rc.2**」一节，补充了针对新版 DeepSeek Harness 的 API 改动、我们做的修补，以及**推荐的安装方式**，建议跳转文末阅读。
 
@@ -8,7 +8,7 @@
 
 ## 以下为原作者 README 原文
 
-# @deepseek-ai/dsh-client-ui-aqua
+# @puny-code/dsh-client-ui-aqua
 
 English | [中文](README.zh.md)
 
@@ -67,7 +67,7 @@ Pin a version or track the dev branch:
 
 ```sh
 git clone --depth 1 --branch v1.1.0 https://github.com/WYH66666666/DSH-Transparent-UI-Plugin.git
-ln -s "$PWD/DSH" "$DSH_HOME/profiles/node_modules/@deepseek-ai/dsh-client-ui-aqua"
+ln -s "$PWD/DSH" "$DSH_HOME/profiles/node_modules/@puny-code/dsh-client-ui-aqua"
 ```
 
 then append to `$DSH_HOME/profiles/web/cordis.patch.yml`:
@@ -75,7 +75,7 @@ then append to `$DSH_HOME/profiles/web/cordis.patch.yml`:
 ```yaml
 - insert:
     - id: ui-aqua
-      name: '@deepseek-ai/dsh-client-ui-aqua'
+      name: '@puny-code/dsh-client-ui-aqua'
 ```
 
 ## Usage
@@ -86,7 +86,7 @@ Reload the web UI. Aqua is **on by default**; the master switch lives in **Setti
 
 ## 原作者中文 README（原文）
 
-# @deepseek-ai/dsh-client-ui-aqua
+# @puny-code/dsh-client-ui-aqua
 
 [English](README.md) | 中文
 
@@ -144,7 +144,7 @@ powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest 'https://github.c
 
 ```sh
 git clone --depth 1 --branch v1.1.0 https://github.com/WYH66666666/DSH-Transparent-UI-Plugin.git
-ln -s "$PWD/DSH" "$DSH_HOME/profiles/node_modules/@deepseek-ai/dsh-client-ui-aqua"
+ln -s "$PWD/DSH" "$DSH_HOME/profiles/node_modules/@puny-code/dsh-client-ui-aqua"
 ```
 
 然后往 `$DSH_HOME/profiles/web/cordis.patch.yml` 追加：
@@ -152,7 +152,7 @@ ln -s "$PWD/DSH" "$DSH_HOME/profiles/node_modules/@deepseek-ai/dsh-client-ui-aqu
 ```yaml
 - insert:
     - id: ui-aqua
-      name: '@deepseek-ai/dsh-client-ui-aqua'
+      name: '@puny-code/dsh-client-ui-aqua'
 ```
 
 ## 使用
@@ -219,7 +219,7 @@ DSH 不在默认 `%USERPROFILE%\.dsh` 时，追加 `-DshHome '你的DSH路径'`�
 **macOS / Linux（手动三步）：**
 
 ```sh
-ln -s "/绝对路径/DSH-Transparent-UI-Plugin" "$DSH_HOME/profiles/node_modules/@deepseek-ai/dsh-client-ui-aqua"
+ln -s "/绝对路径/DSH-Transparent-UI-Plugin" "$DSH_HOME/profiles/node_modules/@puny-code/dsh-client-ui-aqua"
 ```
 
 再往 `$DSH_HOME/profiles/web/cordis.patch.yml` 追加：
@@ -227,7 +227,7 @@ ln -s "/绝对路径/DSH-Transparent-UI-Plugin" "$DSH_HOME/profiles/node_modules
 ```yaml
 - insert:
     - id: ui-aqua
-      name: '@deepseek-ai/dsh-client-ui-aqua'
+      name: '@puny-code/dsh-client-ui-aqua'
 ```
 
 ### 原作者提供的其他安装方式（仅供参考，大概率报错）

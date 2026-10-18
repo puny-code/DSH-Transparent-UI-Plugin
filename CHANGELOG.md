@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.3.2 — 包名改为 @puny-code/dsh-client-ui-aqua
+
+只改包名（自引用全部同步），功能与 v1.3.1 一致。
+
+- 包名由 `@deepseek-ai/dsh-client-ui-aqua` 改为 `@puny-code/dsh-client-ui-aqua`；`cordis.patch.yml` 的 entry `name`、`lib/client.js` 的模块 `id`、`lib/invariant.js` 的 `PACKAGE_NAME`、README/install.ps1 的安装命令同步更新。
+- 原因：`@deepseek-ai/*` 是 DSH 官方 scope，容易被误认为官方内置包；改用第三方 scope 后归属清晰。插件列表的归类不受 scope 影响（`@deepseek-ai/` 前缀本身不参与过滤，`official` 标记只来自 DSH 内置的 OPTIONAL_BUNDLES / OFFICIAL_ON_DEMAND_CATALOG），此项改动只为消除命名歧义。
+- 升级方式：先卸载旧包，再装新包（包名变了，pnpm 不会自动替换）：
+  `dsh plugin --profile desktop remove "@deepseek-ai/dsh-client-ui-aqua"`，再 `dsh plugin --profile desktop add <新 release URL>`。
+- 对 DSH 的 peer 依赖（`@deepseek-ai/dsh-*`）保持不变。
+
 ## v1.3.1 — DSH 0.2.1-rc.2 适配
 
 本次更新只为让 Aqua 在 DeepSeek Harness `0.2.1-rc.2` 上能装上、能加载、能生效；视觉与功能与 v1.3.0 一致。
@@ -11,7 +21,7 @@
 - **图标名适配**：`IconCheckOutline16` → `IconCheckOutlineRegular`（0.2.x 的图标命名由数字尺寸后缀改为 `Regular`/`Medium`）。旧名在 0.2.x 导出为 `undefined`，会让外观行渲染崩溃（React error #130）。
 - **打包修复**（否则 `dsh plugin add` 根本无法安装）：
   - `package.json` 的 `files` 补上 `cordis.patch.yml`。缺它时安装会被拒：`failed to read overlay ...\cordis.patch.yml: ENOENT`。
-  - `cordis.patch.yml` 的 `name` 由无作用域的 `dsh-client-ui-aqua` 改为 `'@deepseek-ai/dsh-client-ui-aqua'`。旧值导致 host 侧 `Cannot find package 'dsh-client-ui-aqua'`，entry 永久不激活。
+  - `cordis.patch.yml` 的 `name` 由无作用域的 `dsh-client-ui-aqua` 改为 `'@puny-code/dsh-client-ui-aqua'`。旧值导致 host 侧 `Cannot find package 'dsh-client-ui-aqua'`，entry 永久不激活。
 - **peer 范围**：所有 `@deepseek-ai/dsh-*` peer 追加 `|| >=0.2.0-rc.1 <0.3.0-0`，使 `0.2.1-rc.2` 通过 DSH 的 peer 兼容判定。
 
 ## main（未发布）
