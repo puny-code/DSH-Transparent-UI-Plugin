@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.3.1 — DSH 0.2.1-rc.2 适配
+
+本次更新只为让 Aqua 在 DeepSeek Harness `0.2.1-rc.2` 上能装上、能加载、能生效；视觉与功能与 v1.3.0 一致。
+
+- **客户端模块迁移**：`lib/client.js` 的 `require("@deepseek-ai/dsh-client-runtime/client")` 改为 `require("@deepseek-ai/dsh-client-store")`。0.2.x 已删除 `dsh-client-runtime` 包，`defineStore`（同签名：`{ init, actions }`）由浏览器侧虚拟模块 `@deepseek-ai/dsh-client-store` 导出（DSH 自己的 `dsh-client-locale` 也这样用）。旧写法在 0.2.x 会硬抛 `client-modules: require(...) missed the module table`，并让整个 Web UI 停在「Failed to load plugins」。
+- **服务依赖调整**：`inject` 由 `["theme","slots","locale","settingsScope"]` 改为 `["theme","slots","locale"]`。`settingsScope` 服务随旧「插件页配置卡」机制一起从 0.2.x 移除，继续 inject 会让插件永久 `pending (waiting for service: settingsScope)`，同样拖垮整个 Web UI。
+- **槽位注册方式**：两处 `ctx.effect(() => ctx.slots.register(...))` 改为 `ctx.slots.inject("<slot>", () => ctx.slots.register(...))`（0.2.x 中槽位由各自的插件工厂在稍后声明，直接 register 会报 `slot "..." is not declared`）。
+- **设置入口变化**：0.2.x 已移除 `settings.plugin.item` 槽位（插件页改为 `settings.plugins.tab`），因此「插件」页不再有 Aqua 主卡片；总开关与全部玻璃调节项统一在 **设置 → 通用设置 → 外观** 的「玻璃效果」行里（默认开启）。
+- **图标名适配**：`IconCheckOutline16` → `IconCheckOutlineRegular`（0.2.x 的图标命名由数字尺寸后缀改为 `Regular`/`Medium`）。旧名在 0.2.x 导出为 `undefined`，会让外观行渲染崩溃（React error #130）。
+- **打包修复**（否则 `dsh plugin add` 根本无法安装）：
+  - `package.json` 的 `files` 补上 `cordis.patch.yml`。缺它时安装会被拒：`failed to read overlay ...\cordis.patch.yml: ENOENT`。
+  - `cordis.patch.yml` 的 `name` 由无作用域的 `dsh-client-ui-aqua` 改为 `'@deepseek-ai/dsh-client-ui-aqua'`。旧值导致 host 侧 `Cannot find package 'dsh-client-ui-aqua'`，entry 永久不激活。
+- **peer 范围**：所有 `@deepseek-ai/dsh-*` peer 追加 `|| >=0.2.0-rc.1 <0.3.0-0`，使 `0.2.1-rc.2` 通过 DSH 的 peer 兼容判定。
+
 ## main（未发布）
 
 - 通用设置 → 外观 顶部新增「玻璃效果」总开关：始终显示，关闭后仍保留开启入口；关闭时下方全部玻璃调节项隐藏并给出提示。与「插件」页玻璃主题主开关共用同一开关状态。
